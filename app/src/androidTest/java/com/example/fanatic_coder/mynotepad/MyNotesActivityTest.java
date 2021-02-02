@@ -34,6 +34,11 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+import static com.example.fanatic_coder.mynotepad.TestUtils.LANDSCAPE;
+import static com.example.fanatic_coder.mynotepad.TestUtils.PORTRAIT;
+import static com.example.fanatic_coder.mynotepad.TestUtils.REVERSE_LANDSCAPE;
+import static com.example.fanatic_coder.mynotepad.TestUtils.REVERSE_PORTRAIT;
+import static com.example.fanatic_coder.mynotepad.TestUtils.switchOrientation;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.not;
@@ -340,6 +345,42 @@ public class MyNotesActivityTest {
         onView(withId(R.id.add_new_note)).perform(click());
         Espresso.pressBack();
         onView(allOf(instanceOf(TextView.class), withParent(withId(R.id.top_app_bar_select_notes)))).check(matches(withText("0 notes selected.")));
+    }
+
+    /**
+     * testSwitchingToLandscape, tests switching from Portrait Orientation to Landscape Orientation.
+     */
+    @Test
+    public void testSwitchingToLandscape() {
+        switchOrientation(myNotesActivityRule, PORTRAIT);
+        switchOrientation(myNotesActivityRule, LANDSCAPE);
+    }
+
+    /**
+     * testSwitchingToPortrait, tests switching from Landscape Orientation to Portrait Orientation.
+     */
+    @Test
+    public void testSwitchingToPortrait() {
+        switchOrientation(myNotesActivityRule, LANDSCAPE);
+        switchOrientation(myNotesActivityRule, PORTRAIT);
+    }
+
+    /**
+     * testSwitchingToReverseLandscape, tests switching from Landscape Orientation to Reverse Landscape Orientation.
+     */
+    @Test
+    public void testSwitchingToReverseLandscape() {
+        switchOrientation(myNotesActivityRule, LANDSCAPE);
+        switchOrientation(myNotesActivityRule, REVERSE_LANDSCAPE);
+    }
+
+    /**
+     * testSwitchingToReversePortrait, tests switching from Portrait Orientation to Reverse Portrait Orientation.
+     */
+    @Test
+    public void testSwitchingToReversePortrait() {
+        switchOrientation(myNotesActivityRule, PORTRAIT);
+        switchOrientation(myNotesActivityRule, REVERSE_PORTRAIT);
     }
 
 }

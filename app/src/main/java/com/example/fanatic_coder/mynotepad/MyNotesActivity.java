@@ -108,6 +108,7 @@ public class MyNotesActivity extends AppCompatActivity implements NoteEventListe
         recyclerView = findViewById(R.id.notes_list);
         recyclerView.setLayoutManager(layoutManager);
         dao = NotesDB.getInstance(this).notesDAO();
+        loadNotes();
 
         /*
           Note search functionality for search edittext on search top bar.
