@@ -6,6 +6,7 @@ import com.example.fanatic_coder.mynotepad.callbacks.NoteEventListener;
 import com.example.fanatic_coder.mynotepad.db.NotesDAO;
 import com.example.fanatic_coder.mynotepad.db.NotesDB;
 import com.example.fanatic_coder.mynotepad.model.Note;
+import com.example.fanatic_coder.mynotepad.utils.SpacesItemGrid;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.button.MaterialButton;
@@ -17,11 +18,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import android.text.Editable;
@@ -104,9 +107,17 @@ public class MyNotesActivity extends AppCompatActivity implements NoteEventListe
         BottomAppBar bottomAppBar = findViewById(R.id.bottom_app_bar);
         setSupportActionBar(bottomAppBar);
 
-        layoutManager = new LinearLayoutManager(this);
+        //For different screen orientations(Portrait or Landscape).
         recyclerView = findViewById(R.id.notes_list);
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            layoutManager = new LinearLayoutManager(this);
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            layoutManager = new GridLayoutManager(this, 2);
+            noteSpacing(recyclerView);
+        }
         recyclerView.setLayoutManager(layoutManager);
+
         dao = NotesDB.getInstance(this).notesDAO();
         loadNotes();
 
@@ -208,6 +219,14 @@ public class MyNotesActivity extends AppCompatActivity implements NoteEventListe
             showHideBottomAppBar();
         }
     };
+
+    /**
+     * noteSpacing, is for spacing the notes, inside notes list(RecyclerView).
+     */
+    private void noteSpacing(RecyclerView recyclerView) {
+        int noteSpacingInPixels = getResources().getDimensionPixelSize(R.dimen.note_between_horizontal_space);
+        recyclerView.addItemDecoration(new SpacesItemGrid(noteSpacingInPixels, 2));
+    }
 
     /**
      * closeKeyboard, closes the user's keyboard, if open.
