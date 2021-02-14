@@ -369,8 +369,9 @@ public class MyNotesActivityTest {
      * testSwitchingToReverseLandscape, tests switching from Landscape Orientation to Reverse Landscape Orientation.
      */
     @Test
-    public void testSwitchingToReverseLandscape() {
+    public void testSwitchingToReverseLandscape() throws InterruptedException {
         switchOrientation(myNotesActivityRule, REVERSE_LANDSCAPE);
+        Thread.sleep(1000);
     }
 
     /**
