@@ -351,16 +351,18 @@ public class MyNotesActivityTest {
      * testSwitchingToLandscape, tests switching from Portrait Orientation to Landscape Orientation.
      */
     @Test
-    public void testSwitchingToLandscape() {
+    public void testSwitchingToLandscape() throws InterruptedException {
         switchOrientation(myNotesActivityRule, LANDSCAPE);
+        Thread.sleep(1000);
     }
 
     /**
      * testSwitchingToPortrait, tests switching from Landscape Orientation to Portrait Orientation.
      */
     @Test
-    public void testSwitchingToPortrait() {
+    public void testSwitchingToPortrait() throws InterruptedException {
         switchOrientation(myNotesActivityRule, PORTRAIT);
+        Thread.sleep(1000);
     }
 
     /**
@@ -376,8 +378,9 @@ public class MyNotesActivityTest {
      * testSwitchingToReversePortrait, tests switching from Portrait Orientation to Reverse Portrait Orientation.
      */
     @Test
-    public void testSwitchingToReversePortrait() {
+    public void testSwitchingToReversePortrait() throws InterruptedException {
         switchOrientation(myNotesActivityRule, REVERSE_PORTRAIT);
+        Thread.sleep(1000);
     }
 
 }
