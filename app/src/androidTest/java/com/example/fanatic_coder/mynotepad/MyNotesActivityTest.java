@@ -370,7 +370,6 @@ public class MyNotesActivityTest {
      */
     @Test
     public void testSwitchingToReverseLandscape() {
-        switchOrientation(myNotesActivityRule, LANDSCAPE);
         switchOrientation(myNotesActivityRule, REVERSE_LANDSCAPE);
     }
 
