@@ -352,7 +352,6 @@ public class MyNotesActivityTest {
      */
     @Test
     public void testSwitchingToLandscape() {
-        switchOrientation(myNotesActivityRule, PORTRAIT);
         switchOrientation(myNotesActivityRule, LANDSCAPE);
     }
 
@@ -361,7 +360,6 @@ public class MyNotesActivityTest {
      */
     @Test
     public void testSwitchingToPortrait() {
-        switchOrientation(myNotesActivityRule, LANDSCAPE);
         switchOrientation(myNotesActivityRule, PORTRAIT);
     }
 
@@ -379,7 +377,6 @@ public class MyNotesActivityTest {
      */
     @Test
     public void testSwitchingToReversePortrait() {
-        switchOrientation(myNotesActivityRule, PORTRAIT);
         switchOrientation(myNotesActivityRule, REVERSE_PORTRAIT);
     }
 
