@@ -95,7 +95,7 @@
             android:layout_gravity="bottom"
             style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
             app:navigationIcon="@drawable/menu_icon"
-            app:menu="@menu/menu_bottom_bar"
+            app:menu="@menu/menu_bottom_top_bar"
             app:buttonGravity="center_vertical"
             app:fabAlignmentMode="center"
             app:fabCradleMargin="8dp"
