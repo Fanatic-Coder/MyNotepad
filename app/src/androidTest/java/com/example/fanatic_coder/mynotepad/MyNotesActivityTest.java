@@ -22,14 +22,12 @@ import org.junit.runner.RunWith;
 
 import java.util.Date;
 
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -200,67 +198,6 @@ public class MyNotesActivityTest {
         //Checking if "select notes title" displays "2 notes selected.".
         onView(allOf(instanceOf(TextView.class), withParent(withId(R.id.top_app_bar_select_notes))))
                 .check(matches(withText("2 notes selected.")));
-    }
-
-    /**
-     * selectingNotesAndCloseNotesSelectedTopAppBar, selects 3 notes,
-     * opens top bar for selecting notes,
-     * checks if note count title at top bar, displays "3 notes selected.",
-     * closes top bar for selecting notes,
-     * and checks again if note count title at top bar, displays "0 notes selected.".
-     */
-    @Test
-    public void selectingNotesAndCloseNotesSelectedTopAppBar() {
-        //Selects 3 notes by long clicking at position 2, 3 and 7.
-        onView(withId(R.id.notes_list)).perform(RecyclerViewActions.actionOnItemAtPosition(2, longClick()));
-        onView(withId(R.id.notes_list)).perform(RecyclerViewActions.actionOnItemAtPosition(3, longClick()));
-        onView(withId(R.id.notes_list)).perform(RecyclerViewActions.actionOnItemAtPosition(7, longClick()));
-
-        //Clicks on "select notes button" to open "top app bar select notes".
-        onView(withId(R.id.select_notes_button)).perform(click());
-        onView(withId(R.id.top_app_bar_select_notes)).perform(click());
-        //Checks if "select notes title" displays "3 notes selected.".
-        onView(allOf(instanceOf(TextView.class), withParent(withId(R.id.top_app_bar_select_notes))))
-                .check(matches(withText("3 notes selected.")));
-
-        //Clicks "top app bar close select notes" button to close "select notes top app bar".
-        onView(withContentDescription("Close select notes toolbar")).perform(click());
-        //Checks if note count title at top bar, displays "0 notes selected.".
-        onView(allOf(instanceOf(TextView.class), withParent(withId(R.id.top_app_bar_select_notes))))
-                .check(matches(withText("0 notes selected.")));
-    }
-
-    /**
-     * selectingNotesSearchingNotesAndCheckingNotesSelectedTitle,
-     * selects 3 notes,
-     * checks if note count title at top bar, displays "3 notes selected.",
-     * types/searches notes with text, "test",
-     * selects one more note,
-     * and checks again if note count title, displays "4 notes selected.".
-     * @throws InterruptedException needed for Thread.sleep called method.
-     */
-    @Test
-    public void selectingNotesSearchingNotesAndCheckingNotesSelectedTitle() throws InterruptedException {
-        //Selects 3 notes by long clicking at positions 2, 3 and 7.
-        onView(withId(R.id.notes_list)).perform(RecyclerViewActions.actionOnItemAtPosition(2, longClick()));
-        onView(withId(R.id.notes_list)).perform(RecyclerViewActions.actionOnItemAtPosition(3, longClick()));
-        onView(withId(R.id.notes_list)).perform(RecyclerViewActions.actionOnItemAtPosition(7, longClick()));
-        //Checks if "select notes title" displays "3 notes selected.".
-        onView(allOf(instanceOf(TextView.class), withParent(withId(R.id.top_app_bar_select_notes))))
-                .check(matches(withText("3 notes selected.")));
-
-        //Opens "search top app bar" by clicking "search button".
-        onView(withId(R.id.search_button)).perform(click());
-        //Types in "search edittext", "test" to search for notes.
-        onView(withId(R.id.search_edittext)).perform(typeText("test")).perform(closeSoftKeyboard());
-        //Thread.sleep throws Unhandled InterruptedException.
-        Thread.sleep(250);
-        //Selects one more note, at position 5.
-        onView(withId(R.id.notes_list)).perform(RecyclerViewActions.actionOnItemAtPosition(1, longClick()));
-
-        //Checks if note count title at top bar, displays "4 notes selected.".
-        onView(allOf(instanceOf(TextView.class), withParent(withId(R.id.top_app_bar_select_notes))))
-                .check(matches(withText("4 notes selected.")));
     }
 
     /**
